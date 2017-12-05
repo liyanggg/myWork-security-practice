@@ -21,23 +21,12 @@ const options = {
 }
 let myxss = new xss.FilterXSS(options);
 
-function htmlEncode (str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
 /**
  * 登录
  */
 router.post('/login', async ( ctx )=>{
   const postData = ctx.request.body;
   const referer = ctx.request.header.referer;
-  if(!postData.username){
-
-  }
   if (!refererReg.test(referer)) {
     ctx.body = {
       success: false,
@@ -89,7 +78,7 @@ router.post('/logout', async ( ctx )=>{
 router.post('/add_comment', async ( ctx )=>{
   let postData = ctx.request.body;
   // 判断是否是登陆了
-  const user = userModel .checkUserByCookie(ctx);
+  const user = userModel.checkUserByCookie(ctx);
   const articleId = postData.articleId;
   const referer = ctx.request.header.referer;
 
@@ -117,7 +106,7 @@ router.post('/add_comment', async ( ctx )=>{
     }
     // 增加评论
     commentModel.addComments(articleId, {
-      comment: htmlEncode(postData.comment),
+      comment: postData.comment,
       date: +postData.date,
       author: user.username,
       avatar: user.avatar

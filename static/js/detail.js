@@ -9,14 +9,6 @@ $(function() {
   const $commentInput = $commentReply.find('.comment-input');
   let articleId;
 
-  function htmlEncode (str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
   /**
    * 获取数据
    */
@@ -108,7 +100,7 @@ $(function() {
           <img src="${item.avatar}" class="user-avatar">
           <div class="comment-item-content">
             <p class="comment-item-author">${item.author}</p>
-            <p class="comment-item-text">${htmlEncode(item.comment)}</p>
+            <p class="comment-item-text">${COMMON.htmlEncode(item.comment)}</p>
           </div>
           <p class="comment-item-date">${COMMON.formatDate("YYYY.MM.DD", item.date)}</p>
         </li>

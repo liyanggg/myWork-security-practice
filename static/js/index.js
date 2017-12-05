@@ -8,14 +8,9 @@ $(function(){
         const articles = data.articles || [];
         let template = '';
         
-        function delHtmlTag(str){
-          var reg = /(<.*?>)/g;
-          var result = str.replace(reg, '');
-          return result;
-        }
         for (let index = 0; index < articles.length; index++) {
           const ele = articles[index];
-          articles[index].content = delHtmlTag(ele.content);
+          articles[index].content = COMMON.delHtmlTag(ele.content);
         }
 
         articles.forEach(article => {
@@ -28,7 +23,7 @@ $(function(){
                 <span class="author">${article.author}</span> 于
                 <span class="date">${date}</span> 发布
               </div>
-              <div class="content">${delHtmlTag(article.content)}</div>
+              <div class="content">${COMMON.delHtmlTag(article.content)}</div>
             </div>
           `
         }, this);
